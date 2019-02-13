@@ -1,5 +1,5 @@
 {
-  "name": "meetupdev",
+  "name": "meetup-dev",
   "version": "1.0.0",
   "private": true,
   "description": "A dev meetup application built with Vue + Vuetify + Firebase",
