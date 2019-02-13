@@ -29,7 +29,7 @@
           flat
           v-for="item in MenuItems"
           :key="item.title"
-          route
+          router
           :to="item.link">
           <v-icon left>{{ item.icon }}</v-icon>
           {{ item.title }}
