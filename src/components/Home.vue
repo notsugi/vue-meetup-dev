@@ -15,7 +15,7 @@
             v-for="meetup in meetups"
             :key="meetup.id"
             :src="meetup.imageUrl">
-            <div class="text-xs-center title">
+            <div class="title">
               {{ meetup.title }}
             </div>
           </v-carousel-item>
