@@ -2,19 +2,20 @@
   <v-container>
     <v-layout row wrap>
       <v-flex xs12 sm6 class="text-xs-center text-sm-right">
-        <v-btn large router to="/meetups" class="info">Explorer Meetups</v-btn>
+        <v-btn large to="/meetups" class="info">Explorer Meetups</v-btn>
       </v-flex>
       <v-flex xs12 sm6 class="text-xs-center text-sm-left">
-        <v-btn large router to="/meetup/new" class="info">Organize Meetups</v-btn>
+        <v-btn large to="/meetup/new" class="info">Organize Meetups</v-btn>
       </v-flex>
     </v-layout>
     <v-layout row wrap class="mt-2">
       <v-flex xs12>
-        <v-carousel>
+        <v-carousel style="cursor: pointer;">
           <v-carousel-item
             v-for="meetup in meetups"
             :key="meetup.id"
-            :src="meetup.imageUrl">
+            :src="meetup.imageUrl"
+            @click="onLoadMeetup(meetup.id)">
             <div class="title">
               {{ meetup.title }}
             </div>
@@ -38,6 +39,12 @@ export default {
         { id: 'asfafdf', imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/b/bf/Tokyo_Montage_2015.jpg', title: 'Meetup in Tokyo' },
         { id: 'sda21rf', imageUrl: 'https://cdn.japantimes.2xx.jp/wp-content/uploads/2018/04/n-kyoto-a-20180406-870x580.jpg', title: 'Meetup in Kyoto' }
       ]
+    }
+  },
+  methods: {
+    onLoadMeetup (id) {
+      // push history and navigate to the respective meetup page
+      this.$router.push({name: 'Meetup', params: { meetupid: id }})
     }
   }
 }
