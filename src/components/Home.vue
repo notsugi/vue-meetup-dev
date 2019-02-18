@@ -33,12 +33,9 @@
 
 <script>
 export default {
-  data () {
-    return {
-      meetups: [
-        { id: 'asfafdf', imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/b/bf/Tokyo_Montage_2015.jpg', title: 'Meetup in Tokyo' },
-        { id: 'sda21rf', imageUrl: 'https://cdn.japantimes.2xx.jp/wp-content/uploads/2018/04/n-kyoto-a-20180406-870x580.jpg', title: 'Meetup in Kyoto' }
-      ]
+  computed: {
+    meetups () {
+      return this.$store.getters.featuredMeetups
     }
   },
   methods: {
