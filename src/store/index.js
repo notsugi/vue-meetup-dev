@@ -10,13 +10,17 @@ export const store = new Vuex.Store({
         id: 'asfafdf',
         imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/b/bf/Tokyo_Montage_2015.jpg',
         title: 'Meetup in Tokyo',
-        date: '2018-07-01'
+        date: new Date(),
+        location: 'Tokyo',
+        description: 'Tokyo meetup. Feel free to participate!'
       },
       {
         id: 'sda21rf',
         imageUrl: 'https://cdn.japantimes.2xx.jp/wp-content/uploads/2018/04/n-kyoto-a-20180406-870x580.jpg',
         title: 'Meetup in Kyoto',
-        date: '2018-07-17'
+        date: new Date(),
+        location: 'Kyoto',
+        description: 'Kyoto, Oideyasu'
       }
     ],
     user: {
@@ -24,8 +28,25 @@ export const store = new Vuex.Store({
       registerdMeetups: ['ajfkaldfjak14']
     }
   },
-  mutations: {},
-  actions: {},
+  mutations: {
+    createMeetup (state, payload) {
+      state.loadedMeetups.push(payload)
+    }
+  },
+  actions: {
+    createMeetup ({commit}, payload) {
+      const meetup = {
+        title: payload.title,
+        location: payload.location,
+        imageUrl: payload.imageUrl,
+        description: payload.description,
+        date: payload.date,
+        id: 'dsjaklfkadlakl'
+      }
+      // Reach out to firebase and store it
+      commit('createMeetup', meetup)
+    }
+  },
   getters: {
     loadedMeetups (state) {
       return state.loadedMeetups.sort((meetupA, meetupB) => {

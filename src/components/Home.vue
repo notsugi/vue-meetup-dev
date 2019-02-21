@@ -1,5 +1,10 @@
 <template>
-  <v-container>
+  <v-container fluid>
+    <v-layout row>
+      <v-flex>
+        <p class="display-2 font-weight-thin text-xs-center primary--text">DevMeetUp</p>
+      </v-flex>
+    </v-layout>
     <v-layout row wrap>
       <v-flex xs12 sm6 class="text-xs-center text-sm-right">
         <v-btn large to="/meetups" class="info">Explorer Meetups</v-btn>
