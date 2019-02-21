@@ -3,6 +3,7 @@ import Vuetify from 'vuetify'
 import App from './App'
 import router from './router'
 import { store } from './store'
+import DateFilter from './filters/date'
 import 'vuetify/dist/vuetify.min.css'
 import colors from 'vuetify/lib/util/colors'
 
@@ -18,6 +19,8 @@ Vue.use(Vuetify, {
   }
 })
 Vue.config.productionTip = false
+
+Vue.filter('formatDate', DateFilter)
 
 /* eslint-disable no-new */
 new Vue({

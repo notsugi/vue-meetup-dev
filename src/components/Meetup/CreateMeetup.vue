@@ -74,7 +74,7 @@
         <v-flex xs12 sm6 class="text-xs-center text-sm-left">
           <v-btn outline class="success--text" @click="resetForm">Clear Form</v-btn>
         </v-flex>
-        {{ submittableDateTime }}
+        <!-- {{ submittableDateTime }} -->
       </v-layout>
     </v-form>
   </v-container>
