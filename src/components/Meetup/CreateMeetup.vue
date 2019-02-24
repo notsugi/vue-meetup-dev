@@ -13,7 +13,7 @@
             label="Title"
             id="title"
             v-model="title"
-            :rules="[v => !!v || 'Title is required.']"
+            :rules="[v => !!v ? true : 'Title is required.']"
             hint="Meetup title"
             required></v-text-field>
         </v-flex>
@@ -23,7 +23,7 @@
             label="Location"
             id="location"
             v-model="location"
-            :rules="[v => !!v || 'Location is required.']"
+            :rules="[v => !!v ? true : 'Location is required.']"
             required></v-text-field>
         </v-flex>
         <v-flex xs12 sm6 offset-sm3>
@@ -32,7 +32,7 @@
             label="Image URL"
             id="imageUrl"
             v-model="imageUrl"
-            :rules="[v => !!v || 'Image is required.']"
+            :rules="[v => !!v ? true : 'Image is required.']"
             required></v-text-field>
         </v-flex>
         <v-flex xs12 sm6 offset-sm3>
@@ -43,7 +43,7 @@
             name="description"
             id="description"
             v-model="description"
-            :rules="[v => !!v || 'Required.']"
+            :rules="[v => !!v ? true : 'Required.']"
             required
             counter>
             <div slot="label">Description</div>
@@ -88,7 +88,7 @@ export default {
       location: '',
       imageUrl: '',
       description: '',
-      date: new Date().toLocaleString('ja-JP', {year: 'numeric', month: '2-digit', day: '2-digit'}).split('/').join('-'),
+      date: new Date().toLocaleString('en-GB', {year: 'numeric', month: '2-digit', day: '2-digit'}).split('/').reverse().join('-'),
       time: new Date().toTimeString().substr(0, 5)
     }
   },
