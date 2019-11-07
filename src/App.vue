@@ -49,11 +49,9 @@ export default {
   components: {
     HelloWorld
   },
-  data () {
-    return {
-      sideNav: false
-    }
-  },
+  data: () => ({
+    sideNav: false
+  }),
   computed: {
     MenuItems () {
       let menuItems = [

@@ -5,6 +5,7 @@ import * as firebase from 'firebase'
 import router from './router'
 import { store } from './store'
 import DateFilter from './filters/date'
+import AlertCmp from './components/Shared/Alert.vue'
 import 'vuetify/dist/vuetify.min.css'
 import colors from 'vuetify/lib/util/colors'
 
@@ -22,6 +23,7 @@ Vue.use(Vuetify, {
 Vue.config.productionTip = false
 
 Vue.filter('formatDate', DateFilter)
+Vue.component('app-alert', AlertCmp)
 
 /* eslint-disable no-new */
 new Vue({

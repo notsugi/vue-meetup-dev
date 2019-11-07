@@ -82,16 +82,14 @@
 
 <script>
 export default {
-  data () {
-    return {
-      title: '',
-      location: '',
-      imageUrl: '',
-      description: '',
-      date: new Date().toLocaleString('en-GB', {year: 'numeric', month: '2-digit', day: '2-digit'}).split('/').reverse().join('-'),
-      time: new Date().toTimeString().substr(0, 5)
-    }
-  },
+  data: () => ({
+    title: '',
+    location: '',
+    imageUrl: '',
+    description: '',
+    date: new Date().toLocaleString('en-GB', {year: 'numeric', month: '2-digit', day: '2-digit'}).split('/').reverse().join('-'),
+    time: new Date().toTimeString().substr(0, 5)
+  }),
   computed: {
     formIsValid () {
       return !!this.title && !!this.location && !!this.imageUrl && !!this.description

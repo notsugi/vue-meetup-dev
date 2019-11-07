@@ -1,5 +1,10 @@
 <template>
   <v-container>
+    <v-layout row v-if="error">
+      <v-flex xs12 sm6 offset-sm3>
+        <app-alert @dismissed="onDismissed" :text="error.message"></app-alert>
+      </v-flex>
+    </v-layout>
     <v-layout row>
       <v-flex xs12 sm6 offset-sm3>
         <v-card>
@@ -35,7 +40,9 @@
                 </v-layout>
                 <v-layout row>
                   <v-flex xs12>
-                    <v-btn class="primary" type="submit">Sign Up</v-btn>
+                    <v-btn class="primary" type="submit" :disabled="loading" :loading="loading">
+                      Sign In
+                    </v-btn>
                   </v-flex>
                 </v-layout>
               </form>
@@ -49,19 +56,23 @@
 
 <script>
 export default {
-  data () {
-    return {
-      email: '',
-      password: '',
-      rules: {
-        required: value => !!value || 'Required.',
-        minlen: v => v.length >= 6 ? true : 'Min 6 characters'
-      }
+  data: () => ({
+    email: '',
+    password: '',
+    rules: {
+      required: value => !!value || 'Required.',
+      minlen: v => v.length >= 6 ? true : 'Min 6 characters'
     }
-  },
+  }),
   computed: {
     user () {
       return this.$store.getters.user
+    },
+    error () {
+      return this.$store.getters.error
+    },
+    loading () {
+      return this.$store.getters.loading
     }
   },
   watch: {
@@ -75,6 +86,9 @@ export default {
   methods: {
     onSignin () {
       this.$store.dispatch('signUserIn', {email: this.email, password: this.password})
+    },
+    onDismissed () {
+      this.$store.dispatch('clearError')
     }
   }
 }
