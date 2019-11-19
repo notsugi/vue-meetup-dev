@@ -87,8 +87,8 @@ export default {
     location: '',
     imageUrl: '',
     description: '',
-    date: new Date().toLocaleString('en-GB', {year: 'numeric', month: '2-digit', day: '2-digit'}).split('/').reverse().join('-'),
-    time: new Date().toTimeString().substr(0, 5),
+    date: new Date().toLocaleDateString('en-GB').split('/').reverse().join('-'),
+    time: '12:00',
     image: null
   }),
   computed: {
@@ -96,23 +96,10 @@ export default {
       return !!this.title && !!this.location && !!this.imageUrl && !!this.description
     },
     submittableDateTime () {
-      const date = new Date()
-      // set date
-      let year = this.date.match(/^(\d+)/)[1]
-      let month = this.date.match(/-(\d+)-/)[1]
-      let day = this.date.match(/(\d+)$/)[1]
-      date.setFullYear(year)
-      date.setMonth(month - 1)
-      date.setDate(day)
-      // set time
-      let hour = this.time.match(/^(\d+)/)[1]
-      let minutes = this.time.match(/:(\d+)/)[1]
-      date.setHours(hour)
-      date.setMinutes(minutes)
-      date.setSeconds(0)
-      // return Date object
-      console.log(date)
-      return date
+      const date = new Date(this.date + ' ' + this.time)
+      // return ISO format string
+      console.log(date.toISOString())
+      return date.toISOString()
     }
   },
   methods: {

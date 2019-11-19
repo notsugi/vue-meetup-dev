@@ -88,7 +88,7 @@ export const store = new Vuex.Store({
         title: payload.title,
         location: payload.location,
         description: payload.description,
-        date: payload.date.toISOString(),
+        date: payload.date,
         creatorId: getters.user.id
       }
       let imageUrl
@@ -163,7 +163,6 @@ export const store = new Vuex.Store({
           error => {
             commit('setLoading', false)
             commit('setError', error)
-            console.log(error)
           }
         )
     },
@@ -185,7 +184,6 @@ export const store = new Vuex.Store({
           error => {
             commit('setLoading', false)
             commit('setError', error)
-            console.log(error)
           }
         )
     },
