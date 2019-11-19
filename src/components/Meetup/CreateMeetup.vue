@@ -27,13 +27,13 @@
             required></v-text-field>
         </v-flex>
         <v-flex xs12 sm6 offset-sm3>
-          <v-text-field
-            name="imageUrl"
-            label="Image URL"
-            id="imageUrl"
-            v-model="imageUrl"
-            :rules="[v => !!v ? true : 'Image is required.']"
-            required></v-text-field>
+          <v-btn raised class="primary" @click="onPickFile">Upload image</v-btn>
+          <input
+            type="file"
+            style="display: none"
+            ref="fileInput"
+            accept="image/*"
+            @change="onFilePicked">
         </v-flex>
         <v-flex xs12 sm6 offset-sm3>
           <v-img :src="imageUrl"></v-img>
@@ -88,7 +88,8 @@ export default {
     imageUrl: '',
     description: '',
     date: new Date().toLocaleString('en-GB', {year: 'numeric', month: '2-digit', day: '2-digit'}).split('/').reverse().join('-'),
-    time: new Date().toTimeString().substr(0, 5)
+    time: new Date().toTimeString().substr(0, 5),
+    image: null
   }),
   computed: {
     formIsValid () {
@@ -119,10 +120,13 @@ export default {
       if (!this.formIsValid) {
         return
       }
+      if (!this.image) {
+        return
+      }
       const meetupData = {
         title: this.title,
         location: this.location,
-        imageUrl: this.imageUrl,
+        image: this.image,
         description: this.description,
         date: this.submittableDateTime
       }
@@ -131,6 +135,22 @@ export default {
     },
     resetForm () {
       this.$refs.createForm.reset()
+    },
+    onPickFile () {
+      this.$refs.fileInput.click()
+    },
+    onFilePicked (event) {
+      const files = event.target.files
+      let filename = files[0].name
+      if (filename.lastIndexOf('.') <= 0) {
+        return alert('Please add a valid file!')
+      }
+      const fileReader = new FileReader()
+      fileReader.addEventListener('load', () => {
+        this.imageUrl = fileReader.result
+      })
+      fileReader.readAsDataURL(files[0])
+      this.image = files[0]
     }
   }
 }

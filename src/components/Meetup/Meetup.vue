@@ -1,10 +1,24 @@
 <template>
   <v-container>
-    <v-layout row wrap>
+    <v-layout row wrap v-if="loading">
+      <v-flex xs12 class="text-xs-center">
+        <v-progress-circular
+          indeterminate
+          color="primary"
+          :width="7"
+          :size="70"
+          v-if="loading"></v-progress-circular>
+      </v-flex>
+    </v-layout>
+    <v-layout row wrap v-else>
       <v-flex xs12>
         <v-card>
           <v-card-title>
             <div class="headline primary--text">{{ meetup.title }}</div>
+            <template v-if="userIsCreator">
+              <v-spacer></v-spacer>
+              <app-edit-meetup-details-dialog :meetup="meetup"></app-edit-meetup-details-dialog>
+            </template>
           </v-card-title>
           <v-img
             :src="meetup.imageUrl"
@@ -21,6 +35,11 @@
         </v-card>
       </v-flex>
     </v-layout>
+    <v-layout row mt-2>
+      <v-flex xs12 class="text-xs-center">
+        <v-btn to="/meetups" class="info">Back</v-btn>
+      </v-flex>
+    </v-layout>
   </v-container>
 </template>
 
@@ -30,6 +49,18 @@ export default {
   computed: {
     meetup () {
       return this.$store.getters.loadedMeetup(this.meetupid)
+    },
+    userIsAuthenticated () {
+      return this.$store.getters.user !== null && this.$store.getters.user !== undefined
+    },
+    userIsCreator () {
+      if (!this.userIsAuthenticated) {
+        return false
+      }
+      return this.$store.getters.user.id === this.meetup.creatorId
+    },
+    loading () {
+      return this.$store.getters.loading
     }
   }
 }
